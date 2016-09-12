@@ -15,7 +15,6 @@ import java.util.Scanner;
 public class Parse {
 	private String nextIn;
 	private Scanner scexp;
-	private boolean debug = true;
 	
 	public Parse(String sentence) {
 		// set up iteration over symbols in the sentence
