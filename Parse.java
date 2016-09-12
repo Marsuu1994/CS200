@@ -59,7 +59,7 @@ public class Parse {
         	nextToken();
         	return true;
     	}
-		return false;
+	return false;
     }
     /* rule is
      * <operator> = + | - | * | /
@@ -69,7 +69,7 @@ public class Parse {
     		nextToken();
     		return true;
     	}
-		return false;
+	return false;
     }
     
 
@@ -95,9 +95,9 @@ public class Parse {
 
 	private void nextToken(){
 		if (scexp.hasNext()) {
-        	nextIn = scexp.next();
-        } 
-    	else { nextIn = ""; }
+        		nextIn = scexp.next();
+        	} 
+    		else { nextIn = ""; }
 	}
 	
 
