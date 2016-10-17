@@ -5,29 +5,23 @@ class Node<K extends Comparable<? super K>>{
 		this.key = key;
 		this.left = left;
 		this.right = right;
-	}
-	
+	}	
 	public Node(K key){
 		this(key, null, null);
-	}
-	
+	}	
 	public boolean isLeaf(){
 		return left == null && right == null;
 	}
 }
 
-
 public class BinarySearchTree <K extends Comparable<? super K>>{
 	Node<K> root;
-	
 	public BinarySearchTree(){
 		this.root = null;
-	}
-	
+	}	
 	void insert(K k){
 		root = insert(root, k);
-	}
-	
+	}	
 	Node<K> insert(Node<K> curr, K k){
 		if(curr == null) return new Node<K>(k);
 		int c = k.compareTo(curr.key);
@@ -41,6 +35,7 @@ public class BinarySearchTree <K extends Comparable<? super K>>{
 		return curr;
 	}
 	
+	//we can also insert in a iterative way
 	void traversing_insert(K k){
 		if(root == null){
 			root = new Node<K>(k);
@@ -85,27 +80,12 @@ public class BinarySearchTree <K extends Comparable<? super K>>{
 		return true;
 	}
 	
-	Node<K> removeNode(Node<K> node){
-		if(node.left == null){
-			node = node.right;
-		}else if(node.right == null){
-			node = node.left;
-		}else{
-			Node<K> temp = node.left;
-			while(temp.right != null){
-				temp = temp.right;
-			}
-			node.key = temp.key;
-			node.left = remove(node.left,temp.key);
-		}
-		return node;
-	}
-	
+	//helper function to start the recursion
 	void remove(K k){
 		root = remove(root, k);
 	}
 	
-	
+	//remove recursivly
 	Node<K> remove(Node<K> curr, K k){
 		if(curr == null){
 			return null;
@@ -123,7 +103,25 @@ public class BinarySearchTree <K extends Comparable<? super K>>{
 		return curr;
 	}
 	
+	//the actual removal is done here
+	Node<K> removeNode(Node<K> node){
+		if(node.left == null){
+			node = node.right;
+		}else if(node.right == null){
+			node = node.left;
+		}else{
+			// this is the tricky part of removing a Node
+			Node<K> temp = node.left;
+			while(temp.right != null){
+				temp = temp.right;
+			}
+			node.key = temp.key;
+			node.left = remove(node.left,temp.key);
+		}
+		return node;
+	}
 	
+	//Printing the tree
 	public void preorderTraverse(Node<K> node, String indent){
 		System.out.println(indent+node.key);		
 		if(node.left!=null) {
@@ -138,7 +136,7 @@ public class BinarySearchTree <K extends Comparable<? super K>>{
 	}
 	
 	
-	
+	//test the tree
 	public static void main(String[] args) {
 		BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(5);
